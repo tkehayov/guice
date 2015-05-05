@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>deposit</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    @EmbedMenu<span/>
+
+    <form method="post" action="/profile/deposit">
+        <div class="form-group">
+            <label for="deposit">
+                Deposit
+            </label>
+            <input type="hidden" name="type" value="deposit">
+            <input type="number" step="any" class="form-control" id="deposit" name="funds">
+        </div>
+        <div>
+            <label class="text-info">
+                ${fundsMessage}
+            </label>
+        </div>
+        <input type="submit" class="btn btn-primary" name="register" value="Submit">
+    </form>
+</div>
+</body>
+</html>
