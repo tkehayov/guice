@@ -7,6 +7,7 @@ import com.clouway.adapter.db.PersistentTransactionRepository;
 import com.clouway.adapter.db.PersistentUserRepository;
 import com.clouway.adapter.db.TransactionRepository;
 import com.clouway.adapter.http.bank.EmbedMenu;
+import com.clouway.adapter.http.bank.EmbedUserProfileHeader;
 import com.clouway.adapter.http.security.SecurityFilter;
 import com.clouway.adapter.http.security.SessionFilter;
 import com.clouway.core.Balance;
@@ -49,6 +50,7 @@ public class AppConfig extends GuiceServletContextListener {
       protected void configureSitebricks() {
         scan(AppConfig.class.getPackage());
         embed(EmbedMenu.class).as("EmbedMenu");
+        embed(EmbedUserProfileHeader.class).as("EmbedUserProfileHeader");
       }
     }, new AbstractModule() {
       @Override

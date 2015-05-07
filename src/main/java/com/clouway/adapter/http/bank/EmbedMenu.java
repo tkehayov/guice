@@ -4,7 +4,7 @@ import com.google.sitebricks.At;
 import com.google.sitebricks.Show;
 
 /**
- * @author Dhanji R. Prasanna (dhanji@gmail.com)
+ * @author Tihomir Kehayov <kehayov89@gmail.com>
  */
 @At("/embed")
 @Show("EmbedMenu.html")
