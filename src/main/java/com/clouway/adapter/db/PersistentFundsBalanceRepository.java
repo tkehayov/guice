@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * @author Tihomir Kehayov (kehayov89@gmail.com)
  */
-public class PersistentBalanceRepository implements BalanceRepository {
+public class PersistentFundsBalanceRepository implements FundsBalanceRepository {
   private Storage storage;
 
   @Inject
-  public PersistentBalanceRepository(@Named("balanceStorage") Storage storage) {
+  public PersistentFundsBalanceRepository(@Named("balanceStorage") Storage storage) {
     this.storage = storage;
   }
 

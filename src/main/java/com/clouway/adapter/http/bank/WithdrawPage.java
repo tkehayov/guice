@@ -1,6 +1,6 @@
 package com.clouway.adapter.http.bank;
 
-import com.clouway.adapter.db.BalanceRepository;
+import com.clouway.adapter.db.FundsBalanceRepository;
 import com.clouway.adapter.db.TransactionRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.NegativeBalanceException;
@@ -23,12 +23,12 @@ public class WithdrawPage {
   public String type;
 
   public String funds;
-  private BalanceRepository repository;
+  private FundsBalanceRepository repository;
   private TransactionRepository transaction;
   private CurrentUser currentUser;
 
   @Inject
-  public WithdrawPage(BalanceRepository repository, TransactionRepository transaction, CurrentUser currentUser) {
+  public WithdrawPage(FundsBalanceRepository repository, TransactionRepository transaction, CurrentUser currentUser) {
     this.repository = repository;
     this.transaction = transaction;
     this.currentUser = currentUser;
@@ -64,7 +64,7 @@ public class WithdrawPage {
     repository.update(balance);
   }
 
-  private Balance getBalance(BalanceRepository repository, Integer userId) {
+  private Balance getBalance(FundsBalanceRepository repository, Integer userId) {
     return repository.findOne(new Balance(userId));
   }
 

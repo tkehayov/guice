@@ -1,8 +1,8 @@
 package clouway;
 
-import com.clouway.adapter.db.BalanceRepository;
+import com.clouway.adapter.db.FundsBalanceRepository;
 import com.clouway.adapter.db.DataStorage;
-import com.clouway.adapter.db.PersistentBalanceRepository;
+import com.clouway.adapter.db.PersistentFundsBalanceRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.NegativeBalanceException;
 import com.clouway.core.Storage;
@@ -26,12 +26,12 @@ public class BalanceTest {
   public DataStoreCleaner dataStoreCleaner = new DataStoreCleaner();
   @Rule
   public ExpectedException exception = ExpectedException.none();
-  private BalanceRepository repository;
+  private FundsBalanceRepository repository;
 
   @Before
   public void setUp() throws Exception {
     Storage storage = new DataStorage(of(new FakeConnection().get()));
-    repository = new PersistentBalanceRepository(storage);
+    repository = new PersistentFundsBalanceRepository(storage);
   }
 
   @Test

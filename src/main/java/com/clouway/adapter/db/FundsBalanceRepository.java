@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author Tihomir Kehayov <kehayov89@gmail.com>
  */
-public interface BalanceRepository {
+public interface FundsBalanceRepository {
   void add(Balance balance);
 
   List<Balance> findAll();

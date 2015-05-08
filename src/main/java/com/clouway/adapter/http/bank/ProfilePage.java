@@ -1,6 +1,6 @@
 package com.clouway.adapter.http.bank;
 
-import com.clouway.adapter.db.BalanceRepository;
+import com.clouway.adapter.db.FundsBalanceRepository;
 import com.clouway.adapter.db.PersistentSessionRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.UserSession;
@@ -27,13 +27,13 @@ import java.util.List;
 public class ProfilePage {
   private final Provider<HttpServletRequest> request;
   private final Provider<HttpServletResponse> response;
-  private BalanceRepository repository;
+  private FundsBalanceRepository repository;
   private PersistentSessionRepository sessionRepository;
   public String username = "";
   public BigDecimal balance;
 
   @Inject
-  public ProfilePage(Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, PersistentSessionRepository sessionRepository, BalanceRepository repository) {
+  public ProfilePage(Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, PersistentSessionRepository sessionRepository, FundsBalanceRepository repository) {
     this.request = request;
     this.response = response;
     this.repository = repository;

@@ -65,8 +65,8 @@ public class AppConfig extends GuiceServletContextListener {
       }
 
       @Provides
-      BalanceRepository balanceRepositoryProvider(Storage storage) {
-        return new PersistentBalanceRepository(storage);
+      FundsBalanceRepository balanceRepositoryProvider(Storage storage) {
+        return new PersistentFundsBalanceRepository(storage);
       }
 
       @Provides

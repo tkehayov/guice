@@ -1,6 +1,6 @@
 package com.clouway.adapter.http.bank;
 
-import com.clouway.adapter.db.BalanceRepository;
+import com.clouway.adapter.db.FundsBalanceRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
@@ -25,16 +25,16 @@ import static java.util.regex.Pattern.compile;
 @Show("registration.html")
 public class UserRegistrationPage {
   private final UserRepository userRepository;
-  private final BalanceRepository balanceRepository;
+  private final FundsBalanceRepository fundsBalanceRepository;
   private final Validator validator;
   public String username;
   public String password;
   public String registerMessage;
 
   @Inject
-  public UserRegistrationPage(UserRepository userRepository, BalanceRepository balanceRepository, Validator validator) {
+  public UserRegistrationPage(UserRepository userRepository, FundsBalanceRepository fundsBalanceRepository, Validator validator) {
     this.userRepository = userRepository;
-    this.balanceRepository = balanceRepository;
+    this.fundsBalanceRepository = fundsBalanceRepository;
     this.validator = validator;
   }
 
@@ -59,7 +59,7 @@ public class UserRegistrationPage {
     }
     User one = userRepository.findOne(user);
     Balance balance = new Balance(one.getId()).deposit(new BigDecimal("0"));
-    balanceRepository.add(balance);
+    fundsBalanceRepository.add(balance);
     registerMessage = "success";
   }
 
