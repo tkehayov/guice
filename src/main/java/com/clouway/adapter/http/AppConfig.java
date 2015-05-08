@@ -11,8 +11,6 @@ import com.clouway.adapter.http.bank.EmbedUserProfileHeader;
 import com.clouway.adapter.http.security.SecurityFilter;
 import com.clouway.adapter.http.security.SessionFilter;
 import com.clouway.core.Balance;
-import com.clouway.core.ConnectionProviderConnection;
-import com.clouway.core.ProviderConnection;
 import com.clouway.core.Repository;
 import com.clouway.core.Storage;
 import com.clouway.core.UserRepository;
@@ -62,13 +60,6 @@ public class AppConfig extends GuiceServletContextListener {
 
         bind(Storage.class).to(DataStorage.class);
         bind(Validator.class).to(RegexValidator.class);
-      }
-
-      @Provides
-      ProviderConnection<Connection> provide() {
-        ProviderConnection<Connection> providerConnection = new ConnectionProviderConnection();
-
-        return providerConnection;
       }
 
       @Provides
