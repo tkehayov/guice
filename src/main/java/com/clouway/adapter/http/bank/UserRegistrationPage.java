@@ -16,6 +16,7 @@ import com.google.sitebricks.http.Post;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import static java.util.regex.Pattern.compile;
 
@@ -42,7 +43,10 @@ public class UserRegistrationPage {
   @Post
   public void register() {
     User user = new User(username, password);
-    Map<String, String> errors = getErrors(user);
+    validate(user.username, new Message("username"), new CorrectMessage("correct"), new IncorrectMessage("incorrect username"), compile("^[a-z]{3,20}+$"));
+    validate(user.password, new Message("password"), new CorrectMessage("correct"), new IncorrectMessage("incorrect password"), compile("^[a-z]{3,20}+$"));
+
+    Map<String, String> errors = validator.getErrorMessages();
     if (!errors.isEmpty()) {
       for (String message : errors.values()) {
         registerMessage = message;
@@ -61,10 +65,7 @@ public class UserRegistrationPage {
     registerMessage = "success";
   }
 
-  private Map<String, String> getErrors(User user) {
-    validator.validate(user.username, new Message("username"), new CorrectMessage("correct"), new IncorrectMessage("incorrect username"), compile("^[a-z]{3,20}+$"));
-    validator.validate(user.password, new Message("password"), new CorrectMessage("correct"), new IncorrectMessage("incorrect password"), compile("^[a-z]{3,20}+$"));
-
-    return validator.getErrorMessages();
+  private void validate(String toValidate, Message message, CorrectMessage correctMessage, IncorrectMessage incorrectMessage, Pattern pattern) {
+    validator.validate(toValidate, message, correctMessage, incorrectMessage, pattern);
   }
 }
