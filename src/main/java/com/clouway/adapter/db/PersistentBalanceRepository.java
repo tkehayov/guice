@@ -20,7 +20,7 @@ public class PersistentBalanceRepository implements Repository<Balance> {
   private Storage storage;
 
   @Inject
-  public PersistentBalanceRepository(@Named("balanceRepository") Storage storage) {
+  public PersistentBalanceRepository(@Named("balanceStorage") Storage storage) {
     this.storage = storage;
   }
 

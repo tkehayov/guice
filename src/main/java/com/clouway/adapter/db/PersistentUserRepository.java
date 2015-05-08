@@ -21,7 +21,7 @@ public class PersistentUserRepository implements UserRepository {
   private final Storage storage;
 
   @Inject
-  public PersistentUserRepository(@Named("userRepository") Storage storage) {
+  public PersistentUserRepository(@Named("userStorage") Storage storage) {
     this.storage = storage;
   }
 

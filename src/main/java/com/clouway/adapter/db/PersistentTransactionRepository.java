@@ -19,7 +19,7 @@ public class PersistentTransactionRepository implements TransactionRepository {
   private Storage storage;
 
   @Inject
-  public PersistentTransactionRepository(@Named("transactionRepository") Storage storage) {
+  public PersistentTransactionRepository(@Named("transactionStorage") Storage storage) {
     this.storage = storage;
   }
 

@@ -30,7 +30,7 @@ public class PersistentSessionRepository implements Repository<UserSession> {
   };
 
   @Inject
-  public PersistentSessionRepository(@Named("sessionRepository") Storage storage) {
+  public PersistentSessionRepository(@Named("sessionStorage") Storage storage) {
     this.storage = storage;
   }
 

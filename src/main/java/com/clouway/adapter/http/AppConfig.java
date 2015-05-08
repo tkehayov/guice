@@ -55,10 +55,10 @@ public class AppConfig extends GuiceServletContextListener {
     }, new AbstractModule() {
       @Override
       protected void configure() {
-        bind(Storage.class).annotatedWith(Names.named("userRepository")).to(DataStorage.class);
-        bind(Storage.class).annotatedWith(Names.named("sessionRepository")).to(DataStorage.class);
-        bind(Storage.class).annotatedWith(Names.named("balanceRepository")).to(DataStorage.class);
-        bind(Storage.class).annotatedWith(Names.named("transactionRepository")).to(DataStorage.class);
+        bind(Storage.class).annotatedWith(Names.named("userStorage")).to(DataStorage.class);
+        bind(Storage.class).annotatedWith(Names.named("sessionStorage")).to(DataStorage.class);
+        bind(Storage.class).annotatedWith(Names.named("balanceStorage")).to(DataStorage.class);
+        bind(Storage.class).annotatedWith(Names.named("transactionStorage")).to(DataStorage.class);
 
         bind(Storage.class).to(DataStorage.class);
         bind(Validator.class).to(RegexValidator.class);
