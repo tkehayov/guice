@@ -1,7 +1,6 @@
 package com.clouway.adapter.http.security;
 
 import com.clouway.adapter.db.PersistentSessionRepository;
-import com.clouway.core.Clock;
 import com.clouway.core.UserSession;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -14,10 +13,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Tihomir Kehayov (kehayov89@gmail.com)
@@ -42,7 +44,7 @@ public class SessionFilter implements Filter {
 
     if (isUserLogged(cookies)) {
       String cookieContent = getCookieContent(cookies, "user");
-      updateSessionRepository(cookieContent);
+      updateUserSession(cookieContent, new Date().getTime() + 600000);
     }
     chain.doFilter(request, response);
   }
@@ -51,14 +53,9 @@ public class SessionFilter implements Filter {
 
   }
 
-  private void updateSessionRepository(String cookieContent) {
-    Clock clock = new Clock() {
-      public Long currentTime() {
-        return new Date().getTime();
-      }
-    };
+  private void updateUserSession(String cookieContent, Long expires) {
     UserSession userSession = repository.findOne(cookieContent);
-    UserSession newUserSession = new UserSession(userSession.userId, userSession.expression).withExpires(clock.currentTime() + 600000);
+    UserSession newUserSession = new UserSession(userSession.userId, userSession.expression).withExpires(expires);
 
     repository.update(newUserSession);
   }
