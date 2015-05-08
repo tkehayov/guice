@@ -1,8 +1,7 @@
-package main.test.clouway;
+package clouway;
 
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentUserRepository;
-import com.clouway.core.ProviderConnection;
 import com.clouway.core.Storage;
 import com.clouway.core.User;
 import org.jmock.auto.Mock;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 
+import static com.google.inject.util.Providers.of;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -45,8 +45,7 @@ public class LoginServletTest {
 
   @Before
   public void setUp() throws Exception {
-    ProviderConnection<Connection> providerConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(providerConnection);
+    Storage storage = new DataStorage(of(new FakeConnection().get()));
     repository = new PersistentUserRepository(storage);
     repository.add(new User("marinov", "ivanov"));
   }

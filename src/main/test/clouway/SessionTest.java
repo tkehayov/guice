@@ -1,11 +1,11 @@
-package main.test.clouway;
+package clouway;
 
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentSessionRepository;
 import com.clouway.core.NotValidSessionException;
-import com.clouway.core.ProviderConnection;
 import com.clouway.core.Storage;
 import com.clouway.core.UserSession;
+import com.google.inject.Provider;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
+import static com.google.inject.util.Providers.of;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -36,10 +37,8 @@ public class SessionTest {
 
   @Before
   public void setUp() throws Exception {
-    ProviderConnection<Connection> providerConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(providerConnection);
+    Storage storage = new DataStorage(of(new FakeConnection().get()));
     sessionRepository = new PersistentSessionRepository(storage);
-
   }
 
   @Test

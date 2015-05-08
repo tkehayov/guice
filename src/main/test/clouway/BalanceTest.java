@@ -1,11 +1,10 @@
-package main.test.clouway;
+package clouway;
 
+import com.clouway.adapter.db.BalanceRepository;
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentBalanceRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.NegativeBalanceException;
-import com.clouway.core.ProviderConnection;
-import com.clouway.core.Repository;
 import com.clouway.core.Storage;
 import org.junit.Before;
 import org.junit.Rule;
@@ -13,9 +12,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.util.List;
 
+import static com.google.inject.util.Providers.of;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -27,12 +26,11 @@ public class BalanceTest {
   public DataStoreCleaner dataStoreCleaner = new DataStoreCleaner();
   @Rule
   public ExpectedException exception = ExpectedException.none();
-  private Repository<Balance> repository;
+  private BalanceRepository repository;
 
   @Before
   public void setUp() throws Exception {
-    ProviderConnection<Connection> providerConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(providerConnection);
+    Storage storage = new DataStorage(of(new FakeConnection().get()));
     repository = new PersistentBalanceRepository(storage);
   }
 

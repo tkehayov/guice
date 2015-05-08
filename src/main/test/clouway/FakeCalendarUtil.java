@@ -1,4 +1,4 @@
-package main.test.clouway;
+package clouway;
 
 import java.util.Calendar;
 

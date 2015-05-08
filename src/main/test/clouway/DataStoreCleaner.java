@@ -1,4 +1,4 @@
-package main.test.clouway;
+package clouway;
 
 import org.junit.rules.ExternalResource;
 

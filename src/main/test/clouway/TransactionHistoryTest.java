@@ -1,20 +1,20 @@
-package main.test.clouway;
+package clouway;
 
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentTransactionRepository;
 import com.clouway.adapter.db.TransactionRepository;
 import com.clouway.core.NegativePageCursorException;
-import com.clouway.core.ProviderConnection;
 import com.clouway.core.Storage;
 import com.clouway.core.TransactionHistory;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.sql.Connection;
 import java.util.List;
 
 import static com.clouway.core.CalendarUtil.dateOf;
+import static com.google.inject.util.Providers.of;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -26,11 +26,15 @@ public class TransactionHistoryTest {
   public DataStoreCleaner cleaner = new DataStoreCleaner();
   @Rule
   public ExpectedException exception = ExpectedException.none();
+  private Storage storage;
+
+  @Before
+  public void setUp() {
+    storage = new DataStorage(of(new FakeConnection().get()));
+  }
 
   @Test
   public void happyPath() {
-    ProviderConnection<Connection> fakeProviderConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(fakeProviderConnection);
 
     TransactionRepository repository = new PersistentTransactionRepository(storage);
     Long date = dateOf(2014, 1, 23);
@@ -53,9 +57,6 @@ public class TransactionHistoryTest {
 
   @Test
   public void limitSecondPage() {
-    ProviderConnection<Connection> fakeProviderConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(fakeProviderConnection);
-
     TransactionRepository repository = new PersistentTransactionRepository(storage);
     Long date = dateOf(2014, 1, 23);
 
@@ -80,9 +81,6 @@ public class TransactionHistoryTest {
   public void negativePageCursor() {
     exception.expect(NegativePageCursorException.class);
 
-    ProviderConnection<Connection> fakeProviderConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(fakeProviderConnection);
-
     TransactionRepository repository = new PersistentTransactionRepository(storage);
     Long date = dateOf(2014, 1, 23);
     repository.add(new TransactionHistory(43, "23.2", "deposit", date));
@@ -92,9 +90,6 @@ public class TransactionHistoryTest {
 
   @Test
   public void getLastPage() {
-    ProviderConnection<Connection> fakeProviderConnection = new FakeConnectionProviderConnection();
-    Storage storage = new DataStorage(fakeProviderConnection);
-
     TransactionRepository repository = new PersistentTransactionRepository(storage);
     Long date = dateOf(2014, 1, 23);
 
