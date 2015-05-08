@@ -12,7 +12,6 @@ import com.google.sitebricks.Show;
 import com.google.sitebricks.http.Post;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -25,15 +24,14 @@ public class LoginPage {
   public String password;
   public String message;
   private final UserRepository userRepository;
-  private Provider<HttpServletRequest> request;
   private Provider<HttpServletResponse> response;
   private SessionRepository sessionRepository;
 
 
   @Inject
-  public LoginPage(UserRepository userRepository, Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, SessionRepository sessionRepository) {
+  public LoginPage(UserRepository userRepository, Provider<HttpServletResponse> response, SessionRepository sessionRepository) {
     this.userRepository = userRepository;
-    this.request = request;
+
     this.response = response;
     this.sessionRepository = sessionRepository;
   }
