@@ -10,13 +10,13 @@ public interface UserRepository {
 
   List<User> findAll();
 
-  User findOne(User type);
+  User findOne(User user);
 
   User findOne(Integer userId);
 
-  void delete(User type);
+  void delete(User user);
 
-  void update(User type);
+  void update(User user);
 
 
 }
