@@ -5,7 +5,7 @@ import com.clouway.adapter.http.bank.EmbedMenu;
 import com.clouway.adapter.http.bank.EmbedUserProfileHeader;
 import com.clouway.adapter.http.security.SecurityFilter;
 import com.clouway.adapter.http.security.SessionFilter;
-import com.clouway.core.Storage;
+import com.clouway.adapter.db.Storage;
 import com.clouway.core.UserRepository;
 import com.clouway.core.validator.RegexValidator;
 import com.clouway.core.validator.Validator;

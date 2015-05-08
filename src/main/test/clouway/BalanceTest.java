@@ -5,7 +5,7 @@ import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentFundsBalanceRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.NegativeBalanceException;
-import com.clouway.core.Storage;
+import com.clouway.adapter.db.Storage;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

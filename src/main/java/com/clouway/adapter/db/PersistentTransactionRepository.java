@@ -2,7 +2,6 @@ package com.clouway.adapter.db;
 
 import com.clouway.core.NegativePageCursorException;
 import com.clouway.core.RowFetcher;
-import com.clouway.core.Storage;
 import com.clouway.core.TransactionHistory;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

@@ -1,4 +1,6 @@
-package com.clouway.core;
+package com.clouway.adapter.db;
+
+import com.clouway.core.RowFetcher;
 
 import java.util.List;
 

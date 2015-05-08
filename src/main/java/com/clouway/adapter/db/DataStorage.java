@@ -1,7 +1,6 @@
 package com.clouway.adapter.db;
 
 import com.clouway.core.RowFetcher;
-import com.clouway.core.Storage;
 import com.clouway.core.UsernameAlreadyExistException;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;

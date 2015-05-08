@@ -4,7 +4,7 @@ import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentTransactionRepository;
 import com.clouway.adapter.db.TransactionRepository;
 import com.clouway.core.NegativePageCursorException;
-import com.clouway.core.Storage;
+import com.clouway.adapter.db.Storage;
 import com.clouway.core.TransactionHistory;
 import org.junit.Before;
 import org.junit.Rule;

@@ -3,16 +3,14 @@ package clouway;
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentSessionRepository;
 import com.clouway.core.NotValidSessionException;
-import com.clouway.core.Storage;
+import com.clouway.adapter.db.Storage;
 import com.clouway.core.UserSession;
-import com.google.inject.Provider;
 import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 

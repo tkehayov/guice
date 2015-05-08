@@ -2,7 +2,7 @@ package clouway;
 
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentUserRepository;
-import com.clouway.core.Storage;
+import com.clouway.adapter.db.Storage;
 import com.clouway.core.User;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
@@ -15,7 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 
 import static com.google.inject.util.Providers.of;
 import static org.hamcrest.core.Is.is;

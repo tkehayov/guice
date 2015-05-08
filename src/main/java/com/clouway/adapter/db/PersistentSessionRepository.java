@@ -3,7 +3,6 @@ package com.clouway.adapter.db;
 import com.clouway.core.Clock;
 import com.clouway.core.NotValidSessionException;
 import com.clouway.core.RowFetcher;
-import com.clouway.core.Storage;
 import com.clouway.core.UserSession;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

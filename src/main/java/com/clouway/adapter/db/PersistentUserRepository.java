@@ -1,7 +1,6 @@
 package com.clouway.adapter.db;
 
 import com.clouway.core.RowFetcher;
-import com.clouway.core.Storage;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UsernameAlreadyExistException;

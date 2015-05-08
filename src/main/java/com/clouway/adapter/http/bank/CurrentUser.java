@@ -3,7 +3,7 @@ package com.clouway.adapter.http.bank;
 import com.clouway.adapter.db.DataStorage;
 import com.clouway.adapter.db.PersistentSessionRepository;
 import com.clouway.adapter.db.PersistentUserRepository;
-import com.clouway.core.Storage;
+import com.clouway.adapter.db.Storage;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UserSession;
