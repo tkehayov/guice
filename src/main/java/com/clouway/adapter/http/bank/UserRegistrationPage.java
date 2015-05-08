@@ -40,7 +40,7 @@ public class UserRegistrationPage {
   }
 
   @Post
-  public void registration() {
+  public void register() {
     User user = new User(username, password);
     Map<String, String> errors = getErrors(user);
     if (!errors.isEmpty()) {
