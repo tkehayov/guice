@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @At("/login")
 @Show("login.html")
-public class LoginUserPage {
+public class LoginPage {
   public String username;
   public String password;
   public String message;
@@ -35,7 +35,7 @@ public class LoginUserPage {
 
 
   @Inject
-  public LoginUserPage(UserRepository userRepository, Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, Repository<UserSession> sessionRepository) {
+  public LoginPage(UserRepository userRepository, Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, Repository<UserSession> sessionRepository) {
     this.userRepository = userRepository;
     this.request = request;
     this.response = response;
