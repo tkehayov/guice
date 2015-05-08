@@ -5,8 +5,6 @@ import com.clouway.core.Repository;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UsernameAlreadyExistException;
-import com.clouway.core.validator.CorrectMessage;
-import com.clouway.core.validator.IncorrectMessage;
 import com.clouway.core.validator.Message;
 import com.clouway.core.validator.Validator;
 import com.google.inject.Inject;
@@ -43,8 +41,8 @@ public class UserRegistrationPage {
   @Post
   public void register() {
     User user = new User(username, password);
-    validate(user.username, new Message("username"), new CorrectMessage("correct"), new IncorrectMessage("incorrect username"), compile("^[a-z]{3,20}+$"));
-    validate(user.password, new Message("password"), new CorrectMessage("correct"), new IncorrectMessage("incorrect password"), compile("^[a-z]{3,20}+$"));
+    validate(user.username, new Message("username"), new Message("correct"), new Message("incorrect username"), compile("^[a-z]{3,20}+$"));
+    validate(user.password, new Message("password"), new Message("correct"), new Message("incorrect password"), compile("^[a-z]{3,20}+$"));
 
     Map<String, String> errors = validator.getErrorMessages();
     if (!errors.isEmpty()) {
@@ -65,7 +63,7 @@ public class UserRegistrationPage {
     registerMessage = "success";
   }
 
-  private void validate(String toValidate, Message message, CorrectMessage correctMessage, IncorrectMessage incorrectMessage, Pattern pattern) {
+  private void validate(String toValidate, Message message, Message correctMessage, Message incorrectMessage, Pattern pattern) {
     validator.validate(toValidate, message, correctMessage, incorrectMessage, pattern);
   }
 }

@@ -11,14 +11,14 @@ public class RegexValidator implements Validator {
   private Map<String, String> errorMessages = new HashMap<String, String>();
   private Map<String, String> correctMessages = new HashMap<String, String>();
 
-  public void validate(String toValidate, Message message, CorrectMessage correctMessage, IncorrectMessage incorrectMessage, Pattern pattern) {
+  public void validate(String toValidate, Message message, Message correct, Message incorrect, Pattern pattern) {
     boolean errorMessage = pattern.matcher(toValidate).matches();
 
     if (!errorMessage) {
-      errorMessages.put(message.message, incorrectMessage.message);
+      errorMessages.put(message.message, incorrect.message);
       return;
     }
-    correctMessages.put(message.message, correctMessage.correctMessage);
+    correctMessages.put(message.message, correct.message);
   }
 
   public Map<String, String> getErrorMessages() {
