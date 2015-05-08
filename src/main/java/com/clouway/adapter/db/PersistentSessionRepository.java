@@ -2,7 +2,6 @@ package com.clouway.adapter.db;
 
 import com.clouway.core.Clock;
 import com.clouway.core.NotValidSessionException;
-import com.clouway.core.Repository;
 import com.clouway.core.RowFetcher;
 import com.clouway.core.Storage;
 import com.clouway.core.UserSession;
@@ -20,7 +19,7 @@ import static com.clouway.core.Hash.getSha;
 /**
  * @author Tihomir Kehayov (kehayov89@gmail.com)
  */
-public class PersistentSessionRepository implements Repository<UserSession> {
+public class PersistentSessionRepository implements SessionRepository {
   private final Storage storage;
 
   private Clock clock = new Clock() {
@@ -45,7 +44,7 @@ public class PersistentSessionRepository implements Repository<UserSession> {
     storage.update(sql, userSession.userId, hashedExpression, clock.currentTime() + 1200);
   }
 
-  public <T> List<T> findAll() {
+  public List<UserSession> findAll() {
     return storage.fetchRows("select user_id, session, expires from sessions", new RowFetcher() {
       public UserSession fetchRow(ResultSet rs) throws SQLException {
         Integer name = rs.getInt(1);

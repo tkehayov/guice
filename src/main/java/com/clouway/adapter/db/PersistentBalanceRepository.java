@@ -2,7 +2,6 @@ package com.clouway.adapter.db;
 
 import com.clouway.core.Balance;
 import com.clouway.core.NegativeBalanceException;
-import com.clouway.core.Repository;
 import com.clouway.core.RowFetcher;
 import com.clouway.core.Storage;
 import com.google.inject.Inject;
@@ -16,7 +15,7 @@ import java.util.List;
 /**
  * @author Tihomir Kehayov (kehayov89@gmail.com)
  */
-public class PersistentBalanceRepository implements Repository<Balance> {
+public class PersistentBalanceRepository implements BalanceRepository {
   private Storage storage;
 
   @Inject
@@ -33,7 +32,7 @@ public class PersistentBalanceRepository implements Repository<Balance> {
     storage.update(sql, type.userId, type.balance());
   }
 
-  public <T> List<T> findAll() {
+  public List<Balance> findAll() {
     return storage.fetchRows("select user_id, cash from balance", new RowFetcher() {
       public Balance fetchRow(ResultSet rs) throws SQLException {
         Integer userId = rs.getInt(1);
@@ -44,8 +43,8 @@ public class PersistentBalanceRepository implements Repository<Balance> {
     });
   }
 
-  public Balance findOne(Balance type) {
-    return storage.fetchRow("select balance.id, balance.user_id, balance.cash,users.username from balance left join users on balance.user_id = users.id where balance.user_id=" + type.userId, new RowFetcher() {
+  public Balance findOne(Balance balance) {
+    return storage.fetchRow("select balance.id, balance.user_id, balance.cash,users.username from balance left join users on balance.user_id = users.id where balance.user_id=" + balance.userId, new RowFetcher() {
       public Balance fetchRow(ResultSet rs) throws SQLException {
         int userId = rs.getInt(2);
         BigDecimal cash = rs.getBigDecimal(3);

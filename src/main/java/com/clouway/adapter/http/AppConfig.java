@@ -1,17 +1,11 @@
 package com.clouway.adapter.http;
 
-import com.clouway.adapter.db.DataStorage;
-import com.clouway.adapter.db.PersistentBalanceRepository;
-import com.clouway.adapter.db.PersistentSessionRepository;
-import com.clouway.adapter.db.PersistentTransactionRepository;
-import com.clouway.adapter.db.PersistentUserRepository;
-import com.clouway.adapter.db.TransactionRepository;
+import com.clouway.adapter.db.*;
 import com.clouway.adapter.http.bank.EmbedMenu;
 import com.clouway.adapter.http.bank.EmbedUserProfileHeader;
 import com.clouway.adapter.http.security.SecurityFilter;
 import com.clouway.adapter.http.security.SessionFilter;
 import com.clouway.core.Balance;
-import com.clouway.core.Repository;
 import com.clouway.core.Storage;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UserSession;
@@ -63,9 +57,9 @@ public class AppConfig extends GuiceServletContextListener {
       }
 
       @Provides
-      Repository<UserSession> provideUserSession(Storage storage) {
-        Repository<UserSession> repository = new PersistentSessionRepository(storage);
-        return repository;
+      SessionRepository provideUserSession(Storage storage) {
+        return new PersistentSessionRepository(storage);
+
       }
 
       @Provides
@@ -74,7 +68,7 @@ public class AppConfig extends GuiceServletContextListener {
       }
 
       @Provides
-      Repository<Balance> balanceRepositoryProvider(Storage storage) {
+      BalanceRepository balanceRepositoryProvider(Storage storage) {
         return new PersistentBalanceRepository(storage);
       }
 

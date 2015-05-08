@@ -1,15 +1,11 @@
 package com.clouway.adapter.http.bank;
 
-import com.clouway.adapter.db.PersistentSessionRepository;
-import com.clouway.adapter.db.PersistentUserRepository;
+import com.clouway.adapter.db.SessionRepository;
 import com.clouway.core.Hash;
-import com.clouway.core.Repository;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UserSession;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.sitebricks.At;
 import com.google.sitebricks.Show;
@@ -31,15 +27,15 @@ public class LoginPage {
   private final UserRepository userRepository;
   private Provider<HttpServletRequest> request;
   private Provider<HttpServletResponse> response;
-  private Repository<UserSession> cookieRepository;
+  private SessionRepository sessionRepository;
 
 
   @Inject
-  public LoginPage(UserRepository userRepository, Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, Repository<UserSession> sessionRepository) {
+  public LoginPage(UserRepository userRepository, Provider<HttpServletRequest> request, Provider<HttpServletResponse> response, SessionRepository sessionRepository) {
     this.userRepository = userRepository;
     this.request = request;
     this.response = response;
-    this.cookieRepository = sessionRepository;
+    this.sessionRepository = sessionRepository;
   }
 
   @Post
@@ -65,11 +61,11 @@ public class LoginPage {
 
 
   private void deleteCookieFromDb(String expression, User oneUser) {
-    cookieRepository.delete(new UserSession(oneUser.getId(), expression));
+    sessionRepository.delete(new UserSession(oneUser.getId(), expression));
   }
 
   private void addCookieInRepository(String expression, User oneUser) {
-    cookieRepository.add(new UserSession(oneUser.getId(), expression));
+    sessionRepository.add(new UserSession(oneUser.getId(), expression));
   }
 
   private void sendCookieToUser(HttpServletResponse response, String expression) {

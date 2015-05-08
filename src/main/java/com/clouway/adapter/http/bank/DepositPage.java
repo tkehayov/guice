@@ -1,10 +1,10 @@
 package com.clouway.adapter.http.bank;
 
+import com.clouway.adapter.db.BalanceRepository;
 import com.clouway.adapter.db.PersistentSessionRepository;
 import com.clouway.adapter.db.TransactionRepository;
 import com.clouway.core.Balance;
 import com.clouway.core.NegativeBalanceException;
-import com.clouway.core.Repository;
 import com.clouway.core.TransactionHistory;
 import com.clouway.core.UserSession;
 import com.google.common.base.Predicate;
@@ -33,12 +33,12 @@ public class DepositPage {
 
   public String funds;
   private TransactionRepository transaction;
-  private Repository<Balance> repository;
+  private BalanceRepository repository;
   private final Provider<HttpServletRequest> req;
   private PersistentSessionRepository sessionRepository;
 
   @Inject
-  public DepositPage(TransactionRepository transaction, Repository<Balance> repository, Provider<HttpServletRequest> req, PersistentSessionRepository sessionRepository) {
+  public DepositPage(TransactionRepository transaction, BalanceRepository repository, Provider<HttpServletRequest> req, PersistentSessionRepository sessionRepository) {
     this.transaction = transaction;
     this.repository = repository;
     this.req = req;
@@ -92,7 +92,7 @@ public class DepositPage {
     repository.update(balance);
   }
 
-  private Balance getBalance(Repository<Balance> repository, Integer userId) {
+  private Balance getBalance(BalanceRepository repository, Integer userId) {
     return repository.findOne(new Balance(userId));
   }
 

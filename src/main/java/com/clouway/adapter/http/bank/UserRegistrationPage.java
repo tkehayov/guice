@@ -1,7 +1,7 @@
 package com.clouway.adapter.http.bank;
 
+import com.clouway.adapter.db.BalanceRepository;
 import com.clouway.core.Balance;
-import com.clouway.core.Repository;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UsernameAlreadyExistException;
@@ -25,14 +25,14 @@ import static java.util.regex.Pattern.compile;
 @Show("registration.html")
 public class UserRegistrationPage {
   private final UserRepository userRepository;
-  private final Repository<Balance> balanceRepository;
+  private final BalanceRepository balanceRepository;
   private final Validator validator;
   public String username;
   public String password;
   public String registerMessage;
 
   @Inject
-  public UserRegistrationPage(UserRepository userRepository, Repository<Balance> balanceRepository, Validator validator) {
+  public UserRegistrationPage(UserRepository userRepository, BalanceRepository balanceRepository, Validator validator) {
     this.userRepository = userRepository;
     this.balanceRepository = balanceRepository;
     this.validator = validator;
