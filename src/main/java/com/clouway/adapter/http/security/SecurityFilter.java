@@ -45,7 +45,7 @@ public class SecurityFilter implements Filter {
     }
 
     if (cookieContent == null || !isValidCookieInRepository(cookies)) {
-      deleteCookieFromRepository(notEmptyCookieContent);
+      deleteSessionFromRepository(notEmptyCookieContent);
       deleteCookieFromUser(cookies, servletResponse);
 
       servletResponse.sendRedirect("/login");
@@ -72,7 +72,7 @@ public class SecurityFilter implements Filter {
     }
   }
 
-  private void deleteCookieFromRepository(String cookieContent) {
+  private void deleteSessionFromRepository(String cookieContent) {
     UserSession cookieToDelete = repository.findOne(cookieContent);
     repository.delete(cookieToDelete);
   }
