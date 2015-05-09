@@ -1,4 +1,4 @@
-package com.clouway.adapter.http;
+package com.clouway.core.validator;
 
 import com.clouway.core.User;
 import com.google.inject.name.Named;

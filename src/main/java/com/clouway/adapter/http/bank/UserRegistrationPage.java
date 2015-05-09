@@ -1,24 +1,19 @@
 package com.clouway.adapter.http.bank;
 
 import com.clouway.adapter.db.FundsBalanceRepository;
-import com.clouway.adapter.http.UserRegistrationRequest;
+import com.clouway.core.validator.UserRegistrationRequest;
 import com.clouway.core.Balance;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
 import com.clouway.core.UsernameAlreadyExistException;
-import com.clouway.core.validator.Message;
 import com.clouway.core.validator.Validator;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.sitebricks.At;
 import com.google.sitebricks.Show;
 import com.google.sitebricks.http.Post;
 
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 import static java.util.regex.Pattern.compile;
 
@@ -54,9 +49,9 @@ public class UserRegistrationPage {
       }
       return;
     }
-
+    User user = new User(username, password)
     try {
-      userRepository.add(new User(username, password));
+      userRepository.add(user);
     } catch (UsernameAlreadyExistException e) {
       registerMessage = "username already exists";
       return;

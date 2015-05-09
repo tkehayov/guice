@@ -1,11 +1,7 @@
 package com.clouway.core.validator;
 
-import com.clouway.adapter.http.UserRegistrationRequest;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import static java.util.regex.Pattern.compile;
