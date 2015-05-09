@@ -40,7 +40,6 @@ public class UserRegistrationPage {
   @Post
   public void register() {
     UserRegistrationRequest userRequest = new UserRegistrationRequest(username, password);
-    validator.validate(userRequest);
 
     List<String> errors = validator.validate(userRequest);
     if (!errors.isEmpty()) {
@@ -49,7 +48,7 @@ public class UserRegistrationPage {
       }
       return;
     }
-    User user = new User(username, password)
+    User user = new User(username, password);
     try {
       userRepository.add(user);
     } catch (UsernameAlreadyExistException e) {
