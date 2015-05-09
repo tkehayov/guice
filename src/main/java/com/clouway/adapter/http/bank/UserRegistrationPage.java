@@ -1,6 +1,7 @@
 package com.clouway.adapter.http.bank;
 
 import com.clouway.adapter.db.FundsBalanceRepository;
+import com.clouway.adapter.http.UserRegistrationRequest;
 import com.clouway.core.Balance;
 import com.clouway.core.User;
 import com.clouway.core.UserRepository;
@@ -8,11 +9,14 @@ import com.clouway.core.UsernameAlreadyExistException;
 import com.clouway.core.validator.Message;
 import com.clouway.core.validator.Validator;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.sitebricks.At;
 import com.google.sitebricks.Show;
 import com.google.sitebricks.http.Post;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -24,12 +28,12 @@ import static java.util.regex.Pattern.compile;
 @At("/registration")
 @Show("registration.html")
 public class UserRegistrationPage {
-  private final UserRepository userRepository;
-  private final FundsBalanceRepository fundsBalanceRepository;
-  private final Validator validator;
   public String username;
   public String password;
   public String registerMessage;
+  private final UserRepository userRepository;
+  private final FundsBalanceRepository fundsBalanceRepository;
+  private final Validator validator;
 
   @Inject
   public UserRegistrationPage(UserRepository userRepository, FundsBalanceRepository fundsBalanceRepository, Validator validator) {
@@ -40,19 +44,19 @@ public class UserRegistrationPage {
 
   @Post
   public void register() {
-    User user = new User(username, password);
-    validate(user.username, new Message("username"), new Message("correct"), new Message("incorrect username"), compile("^[a-z]{3,20}+$"));
-    validate(user.password, new Message("password"), new Message("correct"), new Message("incorrect password"), compile("^[a-z]{3,20}+$"));
+    UserRegistrationRequest userRequest = new UserRegistrationRequest(username, password);
+    validator.validate(userRequest);
 
-    Map<String, String> errors = validator.getErrorMessages();
+    List<String> errors = validator.validate(userRequest);
     if (!errors.isEmpty()) {
-      for (String message : errors.values()) {
-        registerMessage = message;
+      for (String error : errors) {
+        registerMessage = error;
       }
       return;
     }
+
     try {
-      userRepository.add(user);
+      userRepository.add(new User(username, password));
     } catch (UsernameAlreadyExistException e) {
       registerMessage = "username already exists";
       return;
@@ -63,7 +67,4 @@ public class UserRegistrationPage {
     registerMessage = "success";
   }
 
-  private void validate(String toValidate, Message message, Message correctMessage, Message incorrectMessage, Pattern pattern) {
-    validator.validate(toValidate, message, correctMessage, incorrectMessage, pattern);
-  }
 }

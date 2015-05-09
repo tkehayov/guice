@@ -7,7 +7,7 @@ import com.clouway.adapter.http.security.SecurityFilter;
 import com.clouway.adapter.http.security.SessionFilter;
 import com.clouway.adapter.db.Storage;
 import com.clouway.core.UserRepository;
-import com.clouway.core.validator.RegexValidator;
+import com.clouway.core.validator.UserValidator;
 import com.clouway.core.validator.Validator;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -49,9 +49,8 @@ public class AppConfig extends GuiceServletContextListener {
         bind(Storage.class).annotatedWith(Names.named("sessionStorage")).to(DataStorage.class);
         bind(Storage.class).annotatedWith(Names.named("balanceStorage")).to(DataStorage.class);
         bind(Storage.class).annotatedWith(Names.named("transactionStorage")).to(DataStorage.class);
-
         bind(Storage.class).to(DataStorage.class);
-        bind(Validator.class).to(RegexValidator.class);
+        bind(Validator.class).to(UserValidator.class);
       }
 
       @Provides
@@ -78,7 +77,7 @@ public class AppConfig extends GuiceServletContextListener {
       @RequestScoped
       public Connection connection(PGPoolingDataSource dataSource) {
         dataSource.setServerName("localhost");
-        dataSource.setDatabaseName("red-neck-bank");
+        dataSource.setDatabaseName("redneckbank");
         dataSource.setUser("postgres");
         dataSource.setPassword("1234");
         dataSource.setMaxConnections(10);

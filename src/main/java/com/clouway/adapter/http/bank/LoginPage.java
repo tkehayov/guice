@@ -27,7 +27,6 @@ public class LoginPage {
   private Provider<HttpServletResponse> response;
   private SessionRepository sessionRepository;
 
-
   @Inject
   public LoginPage(UserRepository userRepository, Provider<HttpServletResponse> response, SessionRepository sessionRepository) {
     this.userRepository = userRepository;

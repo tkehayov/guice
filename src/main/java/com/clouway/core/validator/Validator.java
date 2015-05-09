@@ -1,6 +1,9 @@
 package com.clouway.core.validator;
 
 
+import com.clouway.adapter.http.UserRegistrationRequest;
+
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -8,9 +11,5 @@ import java.util.regex.Pattern;
  * @author Tihomir Kehayov <kehayov89@gmail.com>
  */
 public interface Validator {
-  void validate(String toValidate, Message message, Message correct, Message incorrect, Pattern pattern);
-
-  Map<String, String> getErrorMessages();
-
-  Map<String, String> getCorrectMessages();
+  List<String> validate(UserRegistrationRequest userRegistrationRequest);
 }
